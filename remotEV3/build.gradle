@@ -1,26 +1,40 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+}
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion '30.0.3'
+    compileSdkVersion 34
 
     defaultConfig {
         applicationId "tanas.ca.ev3controller"
-        minSdkVersion 14
-        targetSdkVersion 30
-        versionCode 5
-        versionName "1.1"
+        minSdkVersion 23
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
     }
+
     buildTypes {
+        debug {
+            debuggable true
+        }
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    api 'com.android.support:appcompat-v7:+'
-    api project(':ev3common')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Librería moderna AndroidX para compatibilidad
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+
+    // Si tienes el módulo ev3common, descomenta la línea siguiente
+    // implementation project(':ev3common')
 }
